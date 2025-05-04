@@ -1,2 +1,2 @@
-# mental-health
-Mental health website project for web class.
+# Mental-Health
+Mental health web project.
