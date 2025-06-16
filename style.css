@@ -122,7 +122,14 @@ li {font-size: 25px;}
 
 .button:hover { color: beige; background-color: #c7846f;}
 
+ul {
+	margin-inline: auto;
+}
 
+ul p { 
+	font-size: 24px;
+	font-weight: bold;
+}
 
 .image-below {
 	position: relative;
@@ -130,6 +137,20 @@ li {font-size: 25px;}
 	width: 250px;
 	height: 250px;
 }
+
+form {
+	display: flex;
+	flex-direction: column;
+	margin-inline: auto;
+	background-color: #7ebfb380;
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	font-size: 25px;
+  	font-family: "Tajawal";
+	padding: 20px;
+	border-radius: 25px;
+}
+
+form > * { margin-block:6px; width: 420px;}
 
 footer {
     margin-top: auto;
@@ -167,3 +188,5 @@ footer a:hover { color: beige; text-decoration: underline; }
 	ol {padding: 0;}
 
 }
+
+textarea {resize: none;}

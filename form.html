@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=el+messiri:wght@400;600&family=tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>calmspace</title>
+</head>
+<body>
+<div style="font-size: 22px; padding: 20px; font-weight: bold" id="datetime" style="font-weight: bold; margin: 10px 0;"></div>
+<nav>
+    <a href="index.html">home</a>
+    <a href="about.html">about</a>
+    <a href="resources.html">resources</a>
+    <a href="activities.html">activities</a>
+    <a style="font-size:20px" href="testimonials.html">testimonials</a>
+    <a href="consulting.html">consulting</a>
+</nav>
+<h1>Mental Health Self-Check</h1>
+
+<form id="selfCheckForm">
+  <label for="select-list">How do you feel today?</label>
+  <select id="select-list" name="mood-list">
+    <option value="">-- Select Mood --</option>
+    <option value="Happy">Happy</option>
+    <option value="Frowning">Frowning</option>
+    <option value="Sad">Sad</option>
+  </select>
+  <span class="error" id="moodError" style="color:red;"></span>
+
+  <label for="sleep">Average sleep (hrs):</label>
+  <input type="number" id="sleep" name="sleep">
+  <span class="error" id="sleepError" style="color:red;"></span>
+
+  <fieldset>
+    <legend>Which activities have you done today?</legend>
+    <span style="font-size: 20px">
+    <input type="checkbox" name="activity" value="Exercise"> Exercise
+    <input type="checkbox" name="activity" value="Meditation"> Meditation
+    <input type="checkbox" name="activity" value="Reading"> Reading
+    <span class="error" id="activityError" style="color:red;"></span>
+    </span>
+  </fieldset>
+
+  <input type="submit" value="Check My Wellness">
+
+  <br><br>
+  <textarea id="report" rows="6" cols="50" readonly></textarea>
+</form>
+
+
+<script>
+window.onload = function () {
+    const dateTime = new Date().toLocaleString();
+    document.getElementById("datetime").textContent = dateTime;
+
+    document.getElementById("selfCheckForm").onsubmit = function (e) {
+        let valid = true;
+
+        document.querySelectorAll("span.error").forEach(span => span.textContent = "");
+
+        const mood = document.getElementById("select-list");
+        if (!mood.value) {
+            document.getElementById("moodError").textContent = "Please select a mood.";
+            valid = false;
+        }
+
+        const sleep = document.getElementById("sleep");
+        if (!sleep.value || isNaN(sleep.value) || sleep.value < 0 || sleep.value > 24) {
+            document.getElementById("sleepError").textContent = "Enter valid sleep hours (0–24).";
+            valid = false;
+        }
+
+        const activities = document.querySelectorAll("input[name='activity']:checked");
+        if (activities.length === 0) {
+            document.getElementById("activityError").textContent = "Select at least one activity.";
+            valid = false;
+        }
+
+        if (!valid) {
+            e.preventDefault();
+            return false;
+        }
+
+        const report = `
+Mood: ${mood.value}
+Sleep: ${sleep.value} hours
+Activities: ${Array.from(activities).map(cb => cb.value).join(", ")}
+        `;
+        document.getElementById("report").value = report;
+        return false;
+    };
+};
+</script>
+
+
+<footer>
+	<div class="footercolumn">made by younes derbashi.
+		<br><span style="font-size: 20px">phone: +962 7 9195 6841 - </span>
+		<span style="font-size: 20px"><a href="mailto:refshex.ana@gmail.com">email</a></span>
+	</div>
+<div class="footercolumn">instructor: <a href="https://www.linkedin.com/in/esraa-alassem-8b09a3246">esraa alassem</a>.</div>
+</footer>
+</body>
+</html>
