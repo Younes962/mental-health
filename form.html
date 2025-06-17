@@ -51,8 +51,31 @@
 
   <br><br>
   <textarea id="report" rows="6" cols="50" readonly></textarea>
+ 
 </form>
 
+<form onsubmit="return validatePhoneNumber()">
+  <label for="phone">Enter Phone Number:</label>
+  <input type="text" id="phone" name="phone" />
+  <button type="submit">Submit</button>
+  <p id="message" style="color:red;"></p>
+</form>
+
+<script>
+  function validatePhoneNumber() {
+    const phoneInput = document.getElementById("phone").value;
+    const message = document.getElementById("message");
+
+    if (phoneInput.startsWith("00962") && phoneInput.length === 14) {
+      message.style.color = "green";
+      message.textContent = "Phone number is valid!";
+      return true;
+    } else {
+      message.textContent = "Invalid phone number. It must start with 00962 and be 14 characters long.";
+      return false;
+    }
+  }
+</script>
 
 <script>
 window.onload = function () {
